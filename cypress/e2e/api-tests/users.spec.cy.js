@@ -1,7 +1,7 @@
 describe('users api testing', () => {
 
 
-    it('fetches Todo items - GET', () => {
+    it('fetches users - GET', () => {
 
         cy.request('GET', '/users')
         .then((response) => {
@@ -22,7 +22,7 @@ describe('users api testing', () => {
         });
     });
 
-    it('delete TODO items - DELETE' , () => {
+    it('delete user - DELETE' , () => {
 
         cy.request('DELETE', '/users/2')
         .then(response => {
