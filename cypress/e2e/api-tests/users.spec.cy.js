@@ -3,7 +3,8 @@ describe('users api testing', () => {
 
     it('fetches Todo items - GET', () => {
 
-        cy.request('GET', '/users').then((response) => {
+        cy.request('GET', '/users')
+        .then((response) => {
             expect(response.status).to.eq(200);
             assert.isObject(response.body, 'Users Response is an object')
         });
@@ -23,7 +24,8 @@ describe('users api testing', () => {
 
     it('delete TODO items - DELETE' , () => {
 
-        cy.request('DELETE', '/users/2').then(response => {
+        cy.request('DELETE', '/users/2')
+        .then(response => {
             expect(response.status).to.eq(204);
         });
     });
