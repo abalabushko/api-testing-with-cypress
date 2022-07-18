@@ -29,4 +29,12 @@ describe('users api testing', () => {
             expect(response.status).to.eq(204);
         });
     });
+
+    it('not found test - GET' , () => {
+
+        cy.request({ url: '/users/23',  failOnStatusCode: false })
+        .then(response => {
+            expect(response.status).to.eq(404);
+        });
+    });
  });
