@@ -3,21 +3,18 @@ describe('users api testing', () => {
 
     it('fetches Todo items - GET', () => {
 
-        cy.request('/users').as('usersRequest');
-        cy.get('@usersRequest').then(users => {
-            expect(users.status).to.eq(200);
-            assert.isObject(users.body, 'Users Response is an object')
+        cy.request('GET', '/users').then((response) => {
+            expect(response.status).to.eq(200);
+            assert.isObject(response.body, 'Users Response is an object')
         });
     });
 
     it('Adds users - POST', () => {
 
         cy.request('POST', '/users/', { name: "morpheus", job: "leader" })
-        .as('usersRequest');
-        // adds new Todo item by defining Todo name
-        cy.get('@usersRequest').then(users => {
-            expect(users.status).to.eq(201);
-            cy.wrap(users.body).should('deep.include', {
+            .then(response => {
+            expect(response.status).to.eq(201);
+            cy.wrap(response.body).should('deep.include', {
                 name: 'morpheus',
                 job: 'leader'
             });
@@ -26,9 +23,8 @@ describe('users api testing', () => {
 
     it('delete TODO items - DELETE' , () => {
 
-        cy.request('DELETE', '/users/2').as('usersRequest');
-        cy.get('@usersRequest').then(users => {
-            expect(users.status).to.eq(204);
+        cy.request('DELETE', '/users/2').then(response => {
+            expect(response.status).to.eq(204);
         });
     });
  });
