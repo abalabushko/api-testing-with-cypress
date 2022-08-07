@@ -1,11 +1,11 @@
-version: 2
-jobs:
+version: 2.1
+orbs:
+  # import Cypress orb by specifying an exact version x.y.z
+  # or the latest version 1.x.x using "@1" syntax
+  cypress: cypress-io/cypress@2
+workflows:
   build:
-    docker:
-      - image: cypress/included:10.4.0
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run: docker run -it -v $PWD:/e2e -w /e2e cypress/included:10.4.0
-      - store_artifacts:
-          path: ~/repo/api-testing-with-cypress
+    jobs:
+      # "cypress" is the name of the imported orb
+      # "run" is the name of the job defined in Cypress orb
+      - cypress/run

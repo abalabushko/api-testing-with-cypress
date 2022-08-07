@@ -6,6 +6,8 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     baseUrl: 'https://reqres.in/api',
-    specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}'
+    specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+    video: false,
+    screenshotOnRunFailure: false
   },
 });
