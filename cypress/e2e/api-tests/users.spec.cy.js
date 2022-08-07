@@ -1,40 +1,42 @@
 describe('users api testing', () => {
 
-
     it('fetches users - GET', () => {
-
-        cy.request('GET', '/users')
+        const token = Cypress.env('auth_token')
+        cy.request('https://gorest.co.in/public/v2/users', {
+        'auth': {
+            'bearer': token
+          }
+        })
         .then((response) => {
             expect(response.status).to.eq(200);
-            assert.isObject(response.body, 'Users Response is an object')
         });
     });
 
-    it('Adds users - POST', () => {
+    // it('Adds users - POST', () => {
 
-        cy.request('POST', '/users/', { name: "morpheus", job: "leader" })
-            .then(response => {
-            expect(response.status).to.eq(201);
-            cy.wrap(response.body).should('deep.include', {
-                name: 'morpheus',
-                job: 'leader'
-            });
-        });
-    });
+    //     cy.request('POST', '/users/', { name: "morpheus", job: "leader" })
+    //         .then(response => {
+    //         expect(response.status).to.eq(201);
+    //         cy.wrap(response.body).should('deep.include', {
+    //             name: 'morpheus',
+    //             job: 'leader'
+    //         });
+    //     });
+    // });
 
-    it('delete user - DELETE' , () => {
+    // it('delete user - DELETE' , () => {
 
-        cy.request('DELETE', '/users/2')
-        .then(response => {
-            expect(response.status).to.eq(204);
-        });
-    });
+    //     cy.request('DELETE', '/users/2')
+    //     .then(response => {
+    //         expect(response.status).to.eq(204);
+    //     });
+    // });
 
-    it('not found test - GET' , () => {
+    // it('not found test - GET' , () => {
 
-        cy.request({ url: '/users/23',  failOnStatusCode: false })
-        .then(response => {
-            expect(response.status).to.eq(404);
-        });
-    });
+    //     cy.request({ url: '/users/23',  failOnStatusCode: false })
+    //     .then(response => {
+    //         expect(response.status).to.eq(404);
+    //     });
+    // });
  });

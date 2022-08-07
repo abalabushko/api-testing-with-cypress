@@ -2,7 +2,7 @@ describe('POKE REST API Test with Cypress', () => {
     
     it('API test - validate headers' , () => {
 
-        cy.request('https://pokeapi.co/api/v2/pokemon/25').as('pokemon')
+        cy.request('/pokemon/25').as('pokemon')
         cy.get('@pokemon')
             .its('headers')
             .its('content-type')
@@ -11,15 +11,24 @@ describe('POKE REST API Test with Cypress', () => {
 
     it('API test - validate status', () => {
 
-        cy.request('https://pokeapi.co/api/v2/pokemon/25').as('pokemon')
+        cy.request('/pokemon/25').as('pokemon')
         cy.get('@pokemon')
             .its('status')
             .should('eq', 200)
     })
 
-    it('API Test - validate name value', () => {
+    it('get by id - validate name value', () => {
 
-        cy.request('https://pokeapi.co/api/v2/pokemon/25').as('pokemon')
+        cy.request('/pokemon/25').as('pokemon')
+        cy.get('@pokemon')
+            .its('body')
+            .should('include', {name: 'pikachu'})
+
+    })
+
+    it('get by name - validate name value', () => {
+
+        cy.request('/pokemon/pikachu').as('pokemon')
         cy.get('@pokemon')
             .its('body')
             .should('include', {name: 'pikachu'})
@@ -30,7 +39,7 @@ describe('POKE REST API Test with Cypress', () => {
 
         cy.request({ 
             method:'GET',
-            url:'https://pokeapi.co/api/v2/pokemon/2500',
+            url:'/2500',
             failOnStatusCode:false
         }).as('pokemon')
         cy.get('@pokemon')
