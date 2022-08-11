@@ -1,28 +1,45 @@
 describe('users api testing', () => {
+    const token = Cypress.env('auth_token')
+    const users_url = '/users'
 
     it('fetches users - GET', () => {
-        const token = Cypress.env('auth_token')
-        cy.request('https://gorest.co.in/public/v2/users', {
-        'auth': {
-            'bearer': token
-          }
-        })
+        cy.request(users_url)
         .then((response) => {
             expect(response.status).to.eq(200);
         });
     });
 
-    // it('Adds users - POST', () => {
+    it('Adds users - POST', () => {
 
-    //     cy.request('POST', '/users/', { name: "morpheus", job: "leader" })
-    //         .then(response => {
-    //         expect(response.status).to.eq(201);
-    //         cy.wrap(response.body).should('deep.include', {
-    //             name: 'morpheus',
-    //             job: 'leader'
-    //         });
-    //     });
-    // });
+        let email = Date.now() + '@test.com'
+        cy.request(
+            {
+            method: 'POST', 
+            url: users_url,
+            auth: {
+            'bearer': token
+            },
+            form: true,
+            body:
+                {
+                name: "morpheus", 
+                gender: "female",
+                email: email,
+                status: "active" 
+            }
+        })
+            .then(response => {
+            expect(response.status).to.eq(201);
+            cy.wrap(response.body)
+            .should('deep.include',
+             {
+                name: 'morpheus',
+                gender: "female",
+                email: email,
+                status: "active" 
+            })
+        })
+    })
 
     // it('delete user - DELETE' , () => {
 
@@ -39,4 +56,4 @@ describe('users api testing', () => {
     //         expect(response.status).to.eq(404);
     //     });
     // });
- });
+ })
