@@ -6,8 +6,8 @@ orbs:
 workflows:
   build:
     jobs:
-      # "apiCypress" is the name of the imported orb
+      # "cypress" is the name of the imported orb
       # "run" is the name of the job defined in Cypress orb
-      - apiCypress/run:
+      - cypress/run:
         env: 
           auth_token: $AUTH0_SECRET
