@@ -50,6 +50,28 @@ describe('users api testing', () => {
         })
      })
 
+     it('update user status - PUT', () => {
+        const inactive_status = 'inactive'
+        cy.fixture('users').then((users) => {
+            const userId = users.id
+        
+            cy.request({
+                method: 'PUT',
+                url: users_url + userId,
+                auth: {
+                    'bearer': token
+                },
+                body: {
+                    status: inactive_status
+                }
+            })
+            .as('updateUser')
+            cy.get('@updateUser')
+                .its('body')
+                .should('include', {status: inactive_status})
+        })
+     })
+
     it('delete user - DELETE' , () => {
         cy.fixture('users').then((users) => {
             const userId = users.id
@@ -66,16 +88,21 @@ describe('users api testing', () => {
         cy.get('@deleteUser')
             .its('status')
             .should('eq', 204)
+    })
 
+    it('fetch deleted user - GET', () => {
+        cy.fixture('users').then((users) => {
+            const userId = users.id
         cy.request({
-             url: users_url + userId,
-              failOnStatusCode: false
-             })
-             .as('getUser')
+            url: users_url + userId,
+             failOnStatusCode: false
+            })
+            .as('getUser')
 
-        cy.get('@getUser')
+            cy.get('@getUser')
             .its('status')
             .should('eq', 404)
+        })
         })  
     })
 })

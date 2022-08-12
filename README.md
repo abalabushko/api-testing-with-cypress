@@ -4,5 +4,4 @@
 
 Automated tests for api using cypress.
 
-* Tests for https://reqres.in/ endpoint 
-* Tests for https://pokeapi.co/ endpoint 
+* API tests for https://gorest.co.in/public/v2 endpoint (GET, POST, PUT, DELETE)
