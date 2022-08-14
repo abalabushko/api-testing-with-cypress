@@ -23,13 +23,12 @@ describe('users api testing', () => {
                 status: active_status
             }
         })
-        .as('user')
+        .should((response) => {
+            expect(response.status).to.eq(201)
+        })
         .then((response) => {
             cy.writeFile('cypress/fixtures/users.json', response.body)
         })
-        cy.get('@user')
-            .its('status')
-            .should('eq', 201)
     })
 
     it('fetches created user - GET', () => {
@@ -43,10 +42,10 @@ describe('users api testing', () => {
                 'bearer': token
             }
         })
-                .as('getUser')
-        cy.get('@getUser')
-            .its('status')
-            .should('eq', 200)
+        .should((response) => {
+            expect(response.status).to.eq(200)
+            expect(response.body).to.include({id: userId})
+        })
         })
      })
      
@@ -73,12 +72,12 @@ describe('users api testing', () => {
                 status: status
             }
         })
-        .should((response) => {
-            expect(response.status).to.eq(422)
-            expect(response.body).to.deep.eq([{ field: 'email', message: 'has already been taken'}])
+            .should((response) => {
+                expect(response.status).to.eq(422)
+                expect(response.body).to.deep.eq([{ field: 'email', message: 'has already been taken'}])
+            })
         })
     })
-})
 
      it('update user status - PUT', () => {
         const inactive_status = 'inactive'
@@ -95,10 +94,10 @@ describe('users api testing', () => {
                     status: inactive_status
                 }
             })
-            .as('updateUser')
-            cy.get('@updateUser')
-                .its('body')
-                .should('include', {status: inactive_status})
+            .should((response) => {
+                expect(response.status).to.eq(200)
+                expect(response.body).to.include({status: inactive_status})
+            })
         })
      })
 
@@ -112,27 +111,25 @@ describe('users api testing', () => {
             auth: {
                 'bearer': token
                 }
+        })
+            .should((response) => {
+                expect(response.status).to.eq(204)
             })
-            .as('deleteUser')
-
-        cy.get('@deleteUser')
-            .its('status')
-            .should('eq', 204)
+        })
     })
 
     it('fetch deleted user - GET', () => {
         cy.fixture('users').then((users) => {
             const userId = users.id
-        cy.request({
-            url: users_url + userId,
-             failOnStatusCode: false
+        
+            cy.request({
+                url: users_url + userId,
+                failOnStatusCode: false
             })
-            .as('getUser')
 
-            cy.get('@getUser')
-            .its('status')
-            .should('eq', 404)
-        })
+                .should((response) => {
+                    expect(response.status).to.eq(404)
+                })
         })  
     })
 })
