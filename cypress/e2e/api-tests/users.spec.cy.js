@@ -5,7 +5,7 @@ describe('users api testing', () => {
     const username = "morpheus"
     const active_status = "active"
 
-    it('Adds users - POST', () => {
+    it('Create user - POST', () => {
         let email = Date.now() + '@test.com'
 
         cy.request(
@@ -49,6 +49,36 @@ describe('users api testing', () => {
             .should('eq', 200)
         })
      })
+     
+     it('Add duplicate users - POST', () => {
+        cy.fixture('users').then((users) => {
+            const name = users.name
+            const gender = users.gender
+            const user_email = users.email
+            const status = users.status
+
+        cy.request(
+            {
+            method: 'POST', 
+            url: users_url,
+            auth: {
+            'bearer': token
+            },
+            failOnStatusCode: false,
+            body:
+                {
+                name: name, 
+                gender: gender,
+                email: user_email,
+                status: status
+            }
+        })
+        .should((response) => {
+            expect(response.status).to.eq(422)
+            expect(response.body).to.deep.eq([{ field: 'email', message: 'has already been taken'}])
+        })
+    })
+})
 
      it('update user status - PUT', () => {
         const inactive_status = 'inactive'
