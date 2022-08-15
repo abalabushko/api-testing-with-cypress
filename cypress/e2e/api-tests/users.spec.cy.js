@@ -1,9 +1,9 @@
 describe('users api testing', () => {
-    const token = Cypress.env('auth_token')
-    const users_url = '/users/'
-    const male_gender = "male"
-    const username = "morpheus"
-    const active_status = "active"
+    const TOKEN = Cypress.env('auth_token')
+    const USERS_URL = '/users/'
+    const MALE_GENDER = "male"
+    const USERNAME = "morpheus"
+    const ACTIVE_STATUS = "active"
 
     it('Create user - POST', () => {
         let email = Date.now() + '@test.com'
@@ -11,16 +11,16 @@ describe('users api testing', () => {
         cy.request(
             {
             method: 'POST', 
-            url: users_url,
+            url: USERS_URL,
             auth: {
-            'bearer': token
+            'bearer': TOKEN
             },
             body:
                 {
-                name: username, 
-                gender: male_gender,
+                name: USERNAME, 
+                gender: MALE_GENDER,
                 email: email,
-                status: active_status
+                status: ACTIVE_STATUS
             }
         })
         .should((response) => {
@@ -36,10 +36,10 @@ describe('users api testing', () => {
             const userId = users.id
         
         cy.request({
-            url: users_url + userId,
+            url: USERS_URL + userId,
             auth:
             {
-                'bearer': token
+                'bearer': TOKEN
             }
         })
         .should((response) => {
@@ -51,25 +51,25 @@ describe('users api testing', () => {
      
      it('Add duplicate users - POST', () => {
         cy.fixture('users').then((users) => {
-            const name = users.name
-            const gender = users.gender
-            const user_email = users.email
-            const status = users.status
+            const NAME = users.name
+            const GENDER = users.gender
+            const USER_EMAIL = users.email
+            const STATUS = users.status
 
         cy.request(
             {
             method: 'POST', 
-            url: users_url,
+            url: USERS_URL,
             auth: {
-            'bearer': token
+            'bearer': TOKEN
             },
             failOnStatusCode: false,
             body:
                 {
-                name: name, 
-                gender: gender,
-                email: user_email,
-                status: status
+                name: NAME, 
+                gender: GENDER,
+                email: USER_EMAIL,
+                status: STATUS
             }
         })
             .should((response) => {
@@ -80,36 +80,36 @@ describe('users api testing', () => {
     })
 
      it('update user status - PUT', () => {
-        const inactive_status = 'inactive'
+        const INACTIVE_STATUS = 'inactive'
         cy.fixture('users').then((users) => {
-            const userId = users.id
+            const USER_ID = users.id
         
             cy.request({
                 method: 'PUT',
-                url: users_url + userId,
+                url: USERS_URL + USER_ID,
                 auth: {
-                    'bearer': token
+                    'bearer': TOKEN
                 },
                 body: {
-                    status: inactive_status
+                    status: INACTIVE_STATUS
                 }
             })
             .should((response) => {
                 expect(response.status).to.eq(200)
-                expect(response.body).to.include({status: inactive_status})
+                expect(response.body).to.include({status: INACTIVE_STATUS})
             })
         })
      })
 
     it('delete user - DELETE' , () => {
         cy.fixture('users').then((users) => {
-            const userId = users.id
+            const USER_ID = users.id
 
         cy.request({
             method: 'DELETE',
-            url: users_url + userId,
+            url: USERS_URL + USER_ID,
             auth: {
-                'bearer': token
+                'bearer': TOKEN
                 }
         })
             .should((response) => {
@@ -120,10 +120,10 @@ describe('users api testing', () => {
 
     it('fetch deleted user - GET', () => {
         cy.fixture('users').then((users) => {
-            const userId = users.id
+            const USER_ID = users.id
         
             cy.request({
-                url: users_url + userId,
+                url: USERS_URL + USER_ID,
                 failOnStatusCode: false
             })
 
