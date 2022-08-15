@@ -33,10 +33,10 @@ describe('users api testing', () => {
 
     it('fetches created user - GET', () => {
         cy.fixture('users').then((users) => {
-            const userId = users.id
+            const USER_ID = users.id
         
         cy.request({
-            url: USERS_URL + userId,
+            url: USERS_URL + USER_ID,
             auth:
             {
                 'bearer': TOKEN
@@ -44,7 +44,7 @@ describe('users api testing', () => {
         })
         .should((response) => {
             expect(response.status).to.eq(200)
-            expect(response.body).to.include({id: userId})
+            expect(response.body).to.include({id: USER_ID})
         })
         })
      })
