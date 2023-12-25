@@ -1,8 +1,9 @@
 const { defineConfig } = require("cypress");
+require('dotenv').config()
 
 module.exports = defineConfig({
   env:{
-    auth_token: 'auth_token',
+    auth_token: process.env.AUTH_TOKEN,
   },
   e2e: {
     setupNodeEvents(on, config) {

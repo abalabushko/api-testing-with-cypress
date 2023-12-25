@@ -10,4 +10,4 @@ workflows:
       # "run" is the name of the job defined in Cypress orb
       - cypress/run:
         env: 
-          auth_token: $API_BEARER_TOKEN
+          AUTH_TOKEN: $API_BEARER_TOKEN
