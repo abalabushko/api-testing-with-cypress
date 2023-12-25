@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   env:{
-    auth_token: Cypress.env('auth_token'),
+    auth_token: 'auth_token',
   },
   e2e: {
     setupNodeEvents(on, config) {
