@@ -1,6 +1,5 @@
 describe('users api testing', () => {
     const TOKEN = Cypress.env('auth_token')
-    cy.log(`Authentication Token: ${TOKEN}`);
     const USERS_URL = '/users/'
     const MALE_GENDER = "male"
     const USERNAME = "morpheus"
@@ -8,7 +7,7 @@ describe('users api testing', () => {
 
     it('Create user - POST', () => {
         let email = Date.now() + '@test.com'
-
+        cy.log(`Authentication Token: ${TOKEN}`);
         cy.request(
             {
             method: 'POST', 
