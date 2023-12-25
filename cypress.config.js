@@ -3,7 +3,7 @@ require('dotenv').config()
 
 module.exports = defineConfig({
   env:{
-    auth_token: 'AUTH0_SECRET',
+    auth_token: process.env.AUTH_TOKEN,
   },
   e2e: {
     setupNodeEvents(on, config) {
