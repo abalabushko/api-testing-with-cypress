@@ -1,6 +1,6 @@
 describe('users api testing', () => {
     const TOKEN = Cypress.env('auth_token')
-    cy.log(`Authentication Token: ${auth_token}`);
+    cy.log(`Authentication Token: ${TOKEN}`);
     const USERS_URL = '/users/'
     const MALE_GENDER = "male"
     const USERNAME = "morpheus"
