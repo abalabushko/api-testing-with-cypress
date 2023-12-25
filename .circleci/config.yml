@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   # import Cypress orb by specifying an exact version x.y.z
   # or the latest version 1.x.x using "@1" syntax
-  cypress: cypress-io/cypress@3.2.1
+  cypress: cypress-io/cypress@3
 workflows:
   build:
     jobs:
@@ -10,4 +10,4 @@ workflows:
       # "run" is the name of the job defined in Cypress orb
       - cypress/run:
         env: 
-          auth_token: $AUTH0_SECRET
+          auth_token: $API_BEARER_TOKEN
