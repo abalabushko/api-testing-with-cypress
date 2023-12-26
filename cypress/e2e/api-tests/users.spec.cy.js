@@ -31,7 +31,7 @@ describe('users api testing', () => {
         })
     })
 
-    it.skip('fetches created user - GET', () => {
+    it('fetches created user - GET', () => {
         cy.fixture('users').then((users) => {
             const USER_ID = users.id
         
@@ -49,7 +49,7 @@ describe('users api testing', () => {
         })
      })
      
-     it.skip('Add duplicate users - POST', () => {
+     it('Add duplicate users - POST', () => {
         cy.fixture('users').then((users) => {
             const NAME = users.name
             const GENDER = users.gender
@@ -79,7 +79,7 @@ describe('users api testing', () => {
         })
     })
 
-     it.skip('update user status - PUT', () => {
+     it('update user status - PUT', () => {
         const INACTIVE_STATUS = 'inactive'
         cy.fixture('users').then((users) => {
             const USER_ID = users.id
@@ -101,7 +101,7 @@ describe('users api testing', () => {
         })
      })
 
-    it.skip('delete user - DELETE' , () => {
+    it('delete user - DELETE' , () => {
         cy.fixture('users').then((users) => {
             const USER_ID = users.id
 
@@ -118,7 +118,7 @@ describe('users api testing', () => {
         })
     })
 
-    it.skip('fetch deleted user - GET', () => {
+    it('fetch deleted user - GET', () => {
         cy.fixture('users').then((users) => {
             const USER_ID = users.id
         

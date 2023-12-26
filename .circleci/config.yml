@@ -1,9 +1,0 @@
-version: 2.1
-orbs:
-  cypress: cypress-io/cypress@3
-workflows:
-  build:
-    jobs:
-      - cypress/run:
-        environment: 
-          AUTH_TOKEN: $AUTH0_SECRET
