@@ -6,9 +6,9 @@ executor: cypress/default
 workflows:
   build:
     jobs:
+      environment:
+            AUTH_TOKEN: $AUTH0_SECRET
       - cypress/run:
           name: Run Cypress tests
           post-install:  |
             echo $AUTH0_SECRET
-          env:
-            AUTH_TOKEN: $AUTH0_SECRET
