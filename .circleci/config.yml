@@ -8,5 +8,7 @@ workflows:
     jobs:
       - cypress/run:
           name: Run Cypress tests
-          env:
+          command:  |
+            echo $AUTH0_SECRET
+          environment:
             AUTH_TOKEN: $AUTH0_SECRET
