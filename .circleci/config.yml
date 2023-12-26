@@ -1,10 +1,12 @@
 version: 2.1
+
 orbs:
   cypress: cypress-io/cypress@3.2.1
+
 workflows:
   build:
     jobs:
       - cypress/run:
           no-workspace: true
-        environment: 
-          AUTH_TOKEN: {{ $AUTH0_SECRET }}
+          environment:
+            AUTH_TOKEN: $AUTH0_SECRET
