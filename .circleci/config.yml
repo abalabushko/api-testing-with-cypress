@@ -1,11 +1,12 @@
 version: 2.1
 
 orbs:
-  cypress: cypress-io/cypress@3.2.1
-
+  cypress: cypress-io/cypress@3
+executor: cypress/default
 workflows:
   build:
     jobs:
       - cypress/run:
+          name: Run Cypress tests
           environment:
             AUTH_TOKEN: $AUTH0_SECRET
