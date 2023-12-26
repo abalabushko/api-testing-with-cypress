@@ -10,5 +10,5 @@ workflows:
           name: Run Cypress tests
           post-install:  |
             echo $AUTH0_SECRET
-          environment:
+          env:
             AUTH_TOKEN: $AUTH0_SECRET
