@@ -7,6 +7,5 @@ workflows:
   build:
     jobs:
       - cypress/run:
-          no-workspace: true
           environment:
             AUTH_TOKEN: $AUTH0_SECRET
