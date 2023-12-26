@@ -6,4 +6,4 @@ workflows:
     jobs:
       - cypress/run:
         env: 
-          AUTH_TOKEN: $AUTH0_SECRET
+          AUTH_TOKEN: {{ $AUTH0_SECRET }}
