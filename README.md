@@ -1,7 +1,7 @@
 # api-testing-with-cypress
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/abalabushko/api-testing-with-cypress/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/abalabushko/api-testing-with-cypress/tree/main)
+[![Cypress API Tests](https://github.com/abalabushko/api-testing-with-cypress/actions/workflows/cypress-api.yml/badge.svg?branch=main)](https://github.com/abalabushko/api-testing-with-cypress/actions/workflows/cypress-api.yml)
 
-Automated tests for api using cypress.
+Automated tests for API using Cypress.
 
 * API tests for https://gorest.co.in/public/v2 endpoint (GET, POST, PUT, DELETE)
