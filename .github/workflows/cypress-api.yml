@@ -1,0 +1,15 @@
+name: Cypress API Tests
+on: push
+jobs:
+  build-and-test:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        env:
+          AUTH_TOKEN: ${{ secrets.API_BEARER_TOKEN }}
